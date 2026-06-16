@@ -138,6 +138,10 @@ src/com/adam/paseotts/MainActivity.java
 - 系统 TTS 语音质量取决于手机安装的 TTS 引擎和语言包。
 - 扫码入口目前主要按小米系统扫码器做了 intent 适配。
 
+## 作者
+
+Adam.liu
+
 ## License
 
 MIT
