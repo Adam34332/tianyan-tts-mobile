@@ -897,13 +897,19 @@ public class MainActivity extends Activity {
     }
 
     private String initialUrlFromIntent(Intent intent) {
+        String explicitUrl = explicitUrlFromIntent(intent);
+        if (!explicitUrl.isEmpty()) return explicitUrl;
+        return START_URL;
+    }
+
+    private String explicitUrlFromIntent(Intent intent) {
         if (intent != null) {
             Uri uri = intent.getData();
             if (uri != null) return uri.toString();
             String extraUrl = intent.getStringExtra("url");
             if (extraUrl != null && !extraUrl.trim().isEmpty()) return extraUrl.trim();
         }
-        return START_URL;
+        return "";
     }
 
     private void loadWebUrl(String rawUrl) {
@@ -1727,10 +1733,15 @@ public class MainActivity extends Activity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
+        String explicitUrl = explicitUrlFromIntent(intent);
+        if (explicitUrl.isEmpty()) {
+            Log.i(TAG, "launcher resume keeps current page");
+            return;
+        }
         if (intent != null && intent.getData() != null) {
-            createNewTab(initialUrlFromIntent(intent), true);
-        } else if (webView != null) {
-            loadWebUrl(initialUrlFromIntent(intent));
+            createNewTab(explicitUrl, true);
+        } else {
+            loadWebUrl(explicitUrl);
         }
     }
 
