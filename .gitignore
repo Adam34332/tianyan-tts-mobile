@@ -1,0 +1,16 @@
+build/
+*.apk
+*.idsig
+*.keystore
+local.properties
+
+# Local handoff / maintenance notes may contain machine-specific paths.
+HANDOFF.md
+MAINTENANCE.md
+
+# Legacy local copy. The shipped injected script is assets/paseo_tts.js.
+/paseo_tts.js
+
+.idea/
+.vscode/
+.DS_Store
